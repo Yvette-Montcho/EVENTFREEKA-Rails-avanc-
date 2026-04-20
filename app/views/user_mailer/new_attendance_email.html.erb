@@ -1,0 +1,123 @@
+<%# app/views/user_mailer/new_attendance_email.html.erb %>
+<%# Template HTML de l'email de notification au créateur d'un événement %>
+<%# Envoyé quand un nouveau participant rejoint l'événement %>
+<%# Variables disponibles : @creator, @participant, @event, @event_url %>
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <%# Encodage UTF-8 obligatoire pour les accents et caractères spéciaux %>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <title>Nouveau participant à votre événement</title>
+    <style>
+      /* Styles identiques au welcome_email pour cohérence visuelle de la marque */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 600px;
+        margin: 30px auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      /* En-tête avec couleur verte pour signifier une bonne nouvelle (nouveau participant) */
+      .header {
+        background-color: #28a745;      /* Vert — signifie une action positive */
+        color: white;
+        text-align: center;
+        padding: 30px 20px;
+      }
+      .header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+      .content {
+        padding: 30px;
+        color: #333333;
+        line-height: 1.6;
+      }
+      /* Boîte de mise en avant pour les informations de l'événement */
+      .event-box {
+        background-color: #f8f9fa;      /* Fond gris très clair pour distinguer le bloc */
+        border-left: 4px solid #28a745; /* Bordure verte à gauche pour l'accent visuel */
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 0 5px 5px 0;
+      }
+      /* Boîte de mise en avant pour les informations du participant */
+      .participant-box {
+        background-color: #e8f4fd;      /* Fond bleu très clair pour différencier du bloc événement */
+        border-left: 4px solid #007bff; /* Bordure bleue pour l'accent */
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 0 5px 5px 0;
+      }
+      .btn {
+        display: inline-block;
+        background-color: #28a745;      /* Bouton vert cohérent avec l'en-tête */
+        color: white;
+        padding: 12px 30px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 20px 0;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 12px;
+        color: #aaaaaa;
+        border-top: 1px solid #eeeeee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <%# === EN-TÊTE === %>
+      <div class="header">
+        <%# Titre personnalisé avec le prénom du créateur de l'événement %>
+        <h1>🎉 Nouveau participant, <%= @creator.first_name %> !</h1>
+      </div>
+
+      <%# === CORPS DU MESSAGE === %>
+      <div class="content">
+        <%# Message d'introduction contextualisé %>
+        <p>Bonne nouvelle ! Un nouvel utilisateur vient de rejoindre votre événement.</p>
+
+        <%# Bloc récapitulatif des informations du participant %>
+        <div class="participant-box">
+          <p><strong>Participant :</strong> <%= @participant.full_name %></p>
+          <p><strong>Email :</strong> <%= @participant.email %></p>
+        </div>
+
+        <%# Bloc récapitulatif des informations de l'événement %>
+        <div class="event-box">
+          <p><strong>Événement :</strong> <%= @event.title %></p>
+          <%# Formatage de la date en français (jour mois année à heure:minute) %>
+          <p><strong>Date :</strong> <%= @event.start_date.strftime("%d/%m/%Y à %H:%M") %></p>
+          <p><strong>Lieu :</strong> <%= @event.location %></p>
+          <%# Nombre total de participants mis à jour après cette inscription %>
+          <p><strong>Nombre de participants :</strong> <%= @event.participants_count %></p>
+        </div>
+
+        <%# Bouton vers la page de gestion de l'événement (liste des participants) %>
+        <p style="text-align: center;">
+          <a href="<%= @event_url %>" class="btn">Voir la liste des participants</a>
+        </p>
+      </div>
+
+      <%# === PIED DE PAGE === %>
+      <div class="footer">
+        <p>Cet email a été envoyé automatiquement par EventFreeka suite à une nouvelle inscription.</p>
+      </div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<%# app/views/user_mailer/welcome_email.text.erb %>
+<%# Template TEXTE de l'email de bienvenue — version sans HTML pour les clients mail qui ne le supportent pas %>
+<%# Rails envoie automatiquement les deux versions (HTML + texte) dans un email multipart %>
+<%# Les variables @user et @url sont définies dans UserMailer#welcome_email %>
+
+Bonjour <%= @user.first_name %> et bienvenue sur EventFreeka !
+
+=============================================================
+
+Nous sommes ravis de t'accueillir sur EventFreeka, la plateforme des événements de ta ville !
+
+Ton compte a bien été créé avec l'adresse email : <%= @user.email %>
+
+Tu peux maintenant :
+  - Découvrir les événements près de chez toi
+  - Créer tes propres événements
+  - Rejoindre des événements organisés par d'autres
+
+Pour accéder à ton espace, connecte-toi ici : <%= @url %>
+
+=============================================================
+
+À très bientôt sur EventFreeka !
+L'équipe EventFreeka
+
+---
+Cet email a été envoyé automatiquement suite à ton inscription sur EventFreeka.
+Si tu n'es pas à l'origine de cette inscription, ignore cet email.

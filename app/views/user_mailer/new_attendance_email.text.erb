@@ -1,0 +1,32 @@
+<%# app/views/user_mailer/new_attendance_email.text.erb %>
+<%# Template TEXTE de l'email de notification au créateur d'un événement %>
+<%# Version sans HTML pour les clients mail qui préfèrent le texte brut %>
+<%# Variables disponibles : @creator, @participant, @event, @event_url %>
+
+Bonjour <%= @creator.first_name %>,
+
+Bonne nouvelle ! Un nouvel utilisateur vient de rejoindre votre événement.
+
+=============================================================
+INFORMATIONS DU PARTICIPANT
+=============================================================
+
+Nom complet : <%= @participant.full_name %>
+Email       : <%= @participant.email %>
+
+=============================================================
+INFORMATIONS DE L'ÉVÉNEMENT
+=============================================================
+
+Titre       : <%= @event.title %>
+Date        : <%= @event.start_date.strftime("%d/%m/%Y à %H:%M") %>
+Lieu        : <%= @event.location %>
+Participants: <%= @event.participants_count %> au total
+
+=============================================================
+
+Pour consulter la liste complète des participants, rendez-vous sur :
+<%= @event_url %>
+
+---
+Cet email a été envoyé automatiquement par EventFreeka suite à une nouvelle inscription.

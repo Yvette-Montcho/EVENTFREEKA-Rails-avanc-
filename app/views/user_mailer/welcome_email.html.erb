@@ -1,0 +1,117 @@
+<%# app/views/user_mailer/welcome_email.html.erb %>
+<%# Template HTML de l'email de bienvenue — rendu visuel riche avec mise en page %>
+<%# Les variables @user et @url sont définies dans UserMailer#welcome_email %>
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <%# Encodage UTF-8 — indispensable pour afficher les caractères spéciaux et accents %>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <%# Titre de l'email (visible dans certains clients mail comme onglet) %>
+    <title>Bienvenue sur EventFreeka</title>
+    <style>
+      /* Style global du corps de l'email */
+      body {
+        font-family: Arial, sans-serif; /* Police sans-serif universellement supportée */
+        background-color: #f4f4f4;      /* Fond gris clair pour délimiter le contenu */
+        margin: 0;
+        padding: 0;
+      }
+      /* Conteneur principal centré avec fond blanc */
+      .container {
+        max-width: 600px;               /* Largeur standard des emails */
+        margin: 30px auto;              /* Centré horizontalement */
+        background-color: #ffffff;      /* Fond blanc pour le contenu */
+        border-radius: 8px;             /* Coins arrondis modernes */
+        overflow: hidden;               /* Cache les coins des enfants qui dépassent */
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Légère ombre pour la profondeur */
+      }
+      /* En-tête colorée de l'email */
+      .header {
+        background-color: #6c63ff;      /* Violet — couleur de marque EventFreeka */
+        color: white;
+        text-align: center;
+        padding: 30px 20px;
+      }
+      /* Titre principal dans l'en-tête */
+      .header h1 {
+        margin: 0;
+        font-size: 28px;
+      }
+      /* Zone de contenu principal */
+      .content {
+        padding: 30px;
+        color: #333333;                 /* Texte sombre pour la lisibilité */
+        line-height: 1.6;               /* Interligne confortable */
+      }
+      /* Bouton d'appel à l'action */
+      .btn {
+        display: inline-block;
+        background-color: #6c63ff;      /* Même couleur que l'en-tête pour la cohérence */
+        color: white;
+        padding: 12px 30px;
+        border-radius: 5px;
+        text-decoration: none;          /* Supprime le soulignement du lien */
+        font-weight: bold;
+        margin: 20px 0;
+      }
+      /* Pied de page discret */
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 12px;
+        color: #aaaaaa;                 /* Gris clair — informations secondaires */
+        border-top: 1px solid #eeeeee;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <%# === EN-TÊTE === %>
+      <div class="header">
+        <%# Titre principal avec le nom de l'utilisateur interpolé en Ruby %>
+        <h1>Bonjour <%= @user.first_name %> ! 👋</h1>
+        <p>Bienvenue sur EventFreeka</p>
+      </div>
+
+      <%# === CORPS DU MESSAGE === %>
+      <div class="content">
+        <%# Message de bienvenue personnalisé avec le nom complet de l'utilisateur %>
+        <p>Nous sommes ravis de t'accueillir sur <strong>EventFreeka</strong>, la plateforme
+        des événements de ta ville !</p>
+
+        <%# Récapitulatif de l'email utilisé à l'inscription (transparence) %>
+        <p>Ton compte a bien été créé avec l'adresse email : <strong><%= @user.email %></strong></p>
+
+        <p>Tu peux maintenant :</p>
+        <ul>
+          <%# Liste des actions disponibles pour motiver l'utilisateur à se connecter %>
+          <li>Découvrir les événements près de chez toi</li>
+          <li>Créer tes propres événements</li>
+          <li>Rejoindre des événements organisés par d'autres</li>
+        </ul>
+
+        <%# Bouton cliquable qui renvoie vers la page de connexion (URL définie dans le mailer) %>
+        <p style="text-align: center;">
+          <a href="<%= @url %>" class="btn">Se connecter à EventFreeka</a>
+        </p>
+
+        <%# Message de clôture chaleureux %>
+        <p>À très bientôt sur EventFreeka ! 🎉</p>
+
+        <%# Signature de l'équipe %>
+        <p>L'équipe EventFreeka</p>
+      </div>
+
+      <%# === PIED DE PAGE === %>
+      <div class="footer">
+        <%# Mention légale standard pour les emails transactionnels %>
+        <p>Cet email a été envoyé automatiquement suite à ton inscription sur EventFreeka.</p>
+        <p>Si tu n'es pas à l'origine de cette inscription, ignore cet email.</p>
+      </div>
+
+    </div>
+  </body>
+</html>

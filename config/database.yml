@@ -1,0 +1,40 @@
+# config/database.yml — configuration de la base de données par environnement
+# Ce fichier est listé dans .gitignore pour ne pas exposer vos identifiants
+
+# Paramètres communs à tous les environnements (facteur DRY via ancre YAML)
+default: &default
+  # Adaptateur PostgreSQL (utilisé dans tous les environnements)
+  adapter: postgresql
+  # Encodage des caractères (UTF-8 recommandé pour le multilinguisme)
+  encoding: unicode
+  # Taille maximale du pool de connexions à la base de données
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+# Environnement de développement local
+development:
+  # Hérite des paramètres communs définis ci-dessus
+  <<: *default
+  # Nom de la base de données de développement
+  database: eventfreeka_development
+  # Identifiants PostgreSQL lus depuis les variables d'environnement (fichier .env)
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  # Serveur PostgreSQL local
+  host: localhost
+
+# Environnement de test (base séparée pour ne pas polluer les données de dev)
+test:
+  # Hérite des paramètres communs définis ci-dessus
+  <<: *default
+  # Nom de la base de données de test (recréée à chaque suite de tests)
+  database: eventfreeka_test
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: localhost
+
+# Environnement de production (Heroku lit DATABASE_URL automatiquement)
+production:
+  # Hérite des paramètres communs définis ci-dessus
+  <<: *default
+  # Heroku fournit DATABASE_URL via ses variables d'environnement
+  url: <%= ENV['DATABASE_URL'] %>
