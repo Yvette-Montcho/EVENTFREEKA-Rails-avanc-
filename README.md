@@ -4,14 +4,6 @@
 
 ---
 
-## Nom du repository GitHub recommandé
-
-```
-eventfreeka
-```
-
-> Ce nom est court, mémorable, unique et reflète parfaitement le nom de l'application.
-
 ---
 
 ## Fonctionnalités principales
@@ -294,6 +286,4 @@ Projet réalisé dans le cadre de la formation **The Hacking Project (THP)** —
 
 ---
 
-## Licence
 
-Ce projet est open source et disponible sous la licence [MIT](https://opensource.org/licenses/MIT).
